@@ -8,6 +8,16 @@ connect
   .catch(() => {
     console.log("database can't connect");
   });
+const watchHistorySchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: false,
+  },
+  timestamp: {
+    type: String,
+    required: false,
+  },
+});
 const LoginSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -16,6 +26,14 @@ const LoginSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  last_watch: {
+    type: String,
+    default:'none',
+  },
+  watch_history: {
+    type: [watchHistorySchema],
+    required: false,
   },
 });
 
