@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const connect = mongoose.connect("mongodb://127.0.0.1:27017/authentication");
+const genresString ="Game show,News,Interview,Politics,Sitcom,Paranormal,Talk,Entertainment,Comedy,Newsmagazine,Basketball,Public affairs,Sports talk,Soap,Health,Football";
 
+const genresArray = genresString.split(",");
+
+const genreCountsObject = {};
+genresArray.forEach((genre) => {
+  genreCountsObject[genre.trim()] = { type: Number, default: 0 };
+});
 connect
   .then(() => {
     console.log("Database connected successfully");
@@ -27,9 +34,9 @@ const LoginSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  last_watch: {
-    type: String,
-    default:'none',
+  genre_counts: {
+    type: genreCountsObject,
+    default: Object.fromEntries(genresArray.map((genre) => [genre.trim(), 0])),
   },
   watch_history: {
     type: [watchHistorySchema],
