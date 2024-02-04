@@ -53,10 +53,13 @@ app.post("/login", async (req, res) => {
       const userData = await collection.findOne({ name: req.body.username });
      
       
-      if (!userData || !userData.watch_history) {
-        console.log("User or watch history not found.");
+      if (!userData || userData.watch_history.length===0) {
+        // console.log("User or watch history not found.");
+       
+        // console.log(userData.watch_history);
+        return res.json({"genre_string":"Drama"})
         res.json({ success: false });
-        return;
+        ;
       }
       const watchHistoryIds = userData.watch_history.map((entry) => entry.id);
 
@@ -125,7 +128,8 @@ app.post("/history",async(req,res)=>{
       { $push: { watch_history: watchHistoryData } },
       { new: true }
     );
-
+    // console.log("usrrr", username);
+    // console.log(watchHistoryData);
     if (result) {
       console.log("Watch history updated successfully.");
       res.json({ success: true });
@@ -201,6 +205,7 @@ async function fun2(req)
 
 const reccData = await response.json();
     let dataList= reccData["ott_recommendations"]["contents"];
+    // console.log("dy2",dataList);
         let responseData= await f(dataList,limit);
             return responseData;
 }
@@ -252,12 +257,23 @@ app.post("/genreSort", async (req,res)=>{
         returning.ott_recommendations.contents=responseData;
     res.json(returning);
     
-
 } )
-app.listen(5000,()=>{
-    console.log("server started on port 5000")
+
+app.post("/livetv", async (req,res)=>{
+  let start="2000-02-02T02:00:00Z", end= "2024-02-02T02:00:00Z";
+  let genre=req.body.genre_string, limit=10;
+  let livetvUrl="https://cla-recommendation.lgads.tv/recommendation/popular?type=livetv&start="+start+"&end="+end+"&genre="+genre+"&limit="+limit;
+  const response= await fetch(livetvUrl, {
+    method: 'GET',
+    headers : {
+        'Authorization':'Bearer 8BMgmyHiG'
+    }
 })
 
+const livetvData = await response.json();
+    // console.log("dy2",livetvData);
+    res.json(livetvData);
+} )
 
 app.listen(5000,()=>{
     console.log("server started on port 5000")
