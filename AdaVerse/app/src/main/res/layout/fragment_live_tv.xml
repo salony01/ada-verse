@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FragmentLiveTv">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/genre_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:text="Choose your genre"/>
+
+    <RadioGroup
+        android:id="@+id/genre_radio_grp"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genre_text">
+
+        <RadioButton
+            android:id="@+id/genre1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Show"/>
+        <RadioButton
+            android:id="@+id/genre2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="News"/>
+        <RadioButton
+            android:id="@+id/genre3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Interview"/>
+        <RadioButton
+            android:id="@+id/genre4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sitcom"/>
+        <RadioButton
+            android:id="@+id/genre5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Politics"/>
+        <RadioButton
+            android:id="@+id/genre6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paranormal"/>
+        <RadioButton
+            android:id="@+id/genre7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Talk"/>
+        <RadioButton
+            android:id="@+id/genre8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sports talk"/>
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genre_radio_grp"
+        android:text="Submit"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
