@@ -179,8 +179,9 @@ contentUrl= epgData['result'][0]['links'][0]['urls']['web'];
 async function f(dataList, limit)
 {
   let responseData=[]
-  for(var i=0; i<limit; i++)
+  for(var i=0; i<dataList.length; i++)
         {
+          console.log("debug f", i, dataList[i])
             let dataId= dataList[i]['id'];
             let currContent=dataList[i];
             const contentUrl= await getUrl(dataId);
@@ -194,7 +195,7 @@ async function f(dataList, limit)
 async function fun2(req)
 {
   // let typee= "ott", show="movie", gen="Drama",limit=10;
-    let typee= "ott", show=req.body.showType, gen=req.body.genre, limit=10;
+    let typee= "ott", show=req.body.showType, gen=req.body.genre, limit=5;
     let reccApiUrl = "https://cla-recommendation.lgads.tv/recommendation/popular?type="+typee+"&genre="+gen+"&showType="+show+"&limit="+limit;
   const response= await fetch(reccApiUrl, {
     method: 'GET',
@@ -213,7 +214,7 @@ const reccData = await response.json();
 async function fun3(req)
 {
   // let typee= "ott", show="movie", gen="Drama",limit=10, ratSort=true, yearSort=false;
-    let typee= "ott", show=req.body.showType, gen=req.body.genre, ratSort=req.body.ratSort, yearSort=req.body.yearSort, limit=10;
+    let typee= "ott", show=req.body.showType, gen=req.body.genre, ratSort=req.body.ratSort, yearSort=req.body.yearSort, limit=5;
     let reccApiUrl = "https://cla-recommendation.lgads.tv/recommendation/popular?type="+typee+"&genre="+gen+"&showType="+show+"&limit="+limit;
   const response= await fetch(reccApiUrl, {
     method: 'GET',
@@ -261,7 +262,7 @@ app.post("/genreSort", async (req,res)=>{
 
 app.post("/livetv", async (req,res)=>{
   let start="2000-02-02T02:00:00Z", end= "2024-02-02T02:00:00Z";
-  let genre=req.body.genre_string, limit=10;
+  let genre=req.body.genre_string, limit=5;
   let livetvUrl="https://cla-recommendation.lgads.tv/recommendation/popular?type=livetv&start="+start+"&end="+end+"&genre="+genre+"&limit="+limit;
   const response= await fetch(livetvUrl, {
     method: 'GET',
